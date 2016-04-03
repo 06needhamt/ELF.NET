@@ -47,7 +47,7 @@ namespace ELF.NET
         {
             head.e_ident = new ELF32_char[16];
             for (int i = 0; i < head.e_ident.Length; i++)
-                head.e_ident[i].value = (byte)stream.ReadByte();
+                head.e_ident[i].value = CreateByte(stream, buffer);
 
             head.e_type.value = CreateUShort(stream, buffer);
             head.e_machine.value = CreateUShort(stream, buffer);
@@ -83,6 +83,13 @@ namespace ELF.NET
             return BitConverter.ToUInt32(buffer, 0);
         }
 
+        private byte CreateByte(FileStream stream, byte[] buffer)
+        {
+            Advance(stream,buffer,sizeof(byte));
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer);
+            return buffer[0];
+        }
         private void Advance(FileStream stream, byte[] buffer, int amount)
         {
             stream.Read(buffer, 0, amount);

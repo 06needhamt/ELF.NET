@@ -40,6 +40,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ELF32IdentifierParser.cs" />
+    <Compile Include="EnumELF32IdentifierBytes.cs" />
     <Compile Include="HeaderParser.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
