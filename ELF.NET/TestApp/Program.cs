@@ -40,9 +40,11 @@ namespace TestApp
             head.e_ident = new ELF32_char[16];
             for (int i = 0; i < head.e_ident.Length; i++)
                 head.e_ident[i].value = (byte)stream.ReadByte();
-            
-            head.e_type.value = CreateUShort(stream,buffer);
+
+            head.e_type.value = CreateUShort(stream, buffer);
             head.e_machine.value = CreateUShort(stream, buffer);
+            head.e_version.value = CreateUInt(stream, buffer);
+            head.e_entry.address = CreateUInt(stream, buffer);
             PrintHeader(head);
             Console.ReadKey();
         }
@@ -53,14 +55,24 @@ namespace TestApp
                 Console.WriteLine("Identifier Byte " + i + " : " + head.e_ident[i].value);
             Console.WriteLine("e_type: " + head.e_type.value);
             Console.WriteLine("e_machine: " + head.e_machine.value);
+            Console.WriteLine("e_version: " + head.e_version.value);
+            Console.WriteLine("e_addr: " + head.e_entry.address);
         }
 
         private static ushort CreateUShort(FileStream stream, byte[] buffer)
         {
-            Advance(stream, buffer, 2);
+            Advance(stream, buffer, sizeof(ushort));
             if (!BitConverter.IsLittleEndian)
                 Array.Reverse(buffer);
             return BitConverter.ToUInt16(buffer, 0);
+        }
+
+        private static uint CreateUInt(FileStream stream, byte[] buffer)
+        {
+            Advance(stream, buffer, sizeof(uint));
+            if (!BitConverter.IsLittleEndian)
+                Array.Reverse(buffer);
+            return BitConverter.ToUInt32(buffer, 0);
         }
 
         private static void Advance(FileStream stream, byte[] buffer, int amount)
