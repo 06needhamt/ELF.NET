@@ -26,6 +26,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.IO;
+using ELF.NET;
 using ELF_Types;
 
 namespace TestApp
@@ -34,50 +35,12 @@ namespace TestApp
     {
         static void Main(string[] args)
         {
-            byte[] buffer = new byte[8];
-            ELF32_header head = new ELF32_header();
-            FileStream stream = File.OpenRead(args[0]);
-            head.e_ident = new ELF32_char[16];
-            for (int i = 0; i < head.e_ident.Length; i++)
-                head.e_ident[i].value = (byte)stream.ReadByte();
-
-            head.e_type.value = CreateUShort(stream, buffer);
-            head.e_machine.value = CreateUShort(stream, buffer);
-            head.e_version.value = CreateUInt(stream, buffer);
-            head.e_entry.address = CreateUInt(stream, buffer);
-            PrintHeader(head);
+            HeaderParser hp = new HeaderParser(args);
+            ELF32_header header = hp.ParseHeader();
+            HeaderParser.PrintHeader(header);
             Console.ReadKey();
         }
 
-        private static void PrintHeader(ELF32_header head)
-        {
-            for (int i = 0; i < head.e_ident.Length; i++)
-                Console.WriteLine("Identifier Byte " + i + " : " + head.e_ident[i].value);
-            Console.WriteLine("e_type: " + head.e_type.value);
-            Console.WriteLine("e_machine: " + head.e_machine.value);
-            Console.WriteLine("e_version: " + head.e_version.value);
-            Console.WriteLine("e_addr: " + head.e_entry.address);
-        }
 
-        private static ushort CreateUShort(FileStream stream, byte[] buffer)
-        {
-            Advance(stream, buffer, sizeof(ushort));
-            if (!BitConverter.IsLittleEndian)
-                Array.Reverse(buffer);
-            return BitConverter.ToUInt16(buffer, 0);
-        }
-
-        private static uint CreateUInt(FileStream stream, byte[] buffer)
-        {
-            Advance(stream, buffer, sizeof(uint));
-            if (!BitConverter.IsLittleEndian)
-                Array.Reverse(buffer);
-            return BitConverter.ToUInt32(buffer, 0);
-        }
-
-        private static void Advance(FileStream stream, byte[] buffer, int amount)
-        {
-            stream.Read(buffer, 0, amount);
-        }
     }
 }
