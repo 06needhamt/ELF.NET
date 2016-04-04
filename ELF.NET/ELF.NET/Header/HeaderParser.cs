@@ -29,7 +29,7 @@ using System.Threading.Tasks;
 using ELF_Types;
 
 
-namespace ELF.NET
+namespace ELF.NET.Header
 {
     public class HeaderParser
     {

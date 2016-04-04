@@ -25,13 +25,19 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ELF_Types;
 
-namespace ELF.NET
+namespace ELF.NET.Header
 {
-    class ELF32IdentifierParser
+    public enum EnumELFIdentifierBytes
     {
-        private ELF32_char[] identifier;
-        private char[] magic = new char[]{(char)0x7f, 'E', 'L', 'F'};
+        EI_MAG0 = 0,
+        EI_MAG1 = 1,
+        EI_MAG2 = 2,
+        EI_MAG3 = 3,
+        EI_CLASS = 4,
+        EI_DATA = 5,
+        EI_VERSION = 6,
+        EI_PAD = 7,
+        EI_NINDENT = 16,
     }
 }

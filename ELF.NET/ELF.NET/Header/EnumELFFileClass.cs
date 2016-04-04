@@ -20,24 +20,12 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace ELF.NET
+namespace ELF.NET.Header
 {
-    public enum EnumELF32IdentifierBytes
+    public enum EnumELFFileClass
     {
-        EI_MAG0 = 0,
-        EI_MAG1 = 1,
-        EI_MAG2 = 2,
-        EI_MAG3 = 3,
-        EI_CLASS = 4,
-        EI_DATA = 5,
-        EI_VERSION = 6,
-        EI_PAD = 7,
-        EI_NINDENT = 16,
+        ELFCLASSNONE = 0,
+        ELFCLASS32 = 1,
+        ELFCLASS64 = 2,
     }
 }

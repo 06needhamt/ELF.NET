@@ -25,41 +25,33 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.IO;
-using ELF.NET;
-using ELF.NET.Header;
 using ELF_Types;
+using static ELF.NET.Header.EnumELFIdentifierBytes;
 
-namespace TestApp
+namespace ELF.NET.Header
 {
-    class Program
+    public class ELFIdentifierParser
     {
-        static void Main(string[] args)
+        private ELF32_char[] identifier;
+        private char[] magic = new char[]{(char)0x7f, 'E', 'L', 'F'};
+
+        public ELFIdentifierParser(ELF32_char[] identifier)
         {
-            if (args.Length < 1)
-            {
-                Console.WriteLine("Invalid command line args");
-                Console.ReadKey();
-                return;
-            }
-            HeaderParser hp = new HeaderParser(args);
-            ELF32_header header = hp.ParseHeader();
-            HeaderParser.PrintHeader(header);
-            ELFIdentifierParser identparser = new ELFIdentifierParser(header.e_ident);
-            if (identparser.CheckMagic())
-            {
-                Console.WriteLine(args[0] + " is a valid ELF file");
-            }
-            else
-            {
-                Console.WriteLine(args[0] + " is not a valid ELF file");
-                Console.ReadKey();
-                return;
-            }
-            Console.WriteLine("ELF File Class: " + identparser.GetFileClass().ToString());
-            Console.ReadKey();
+            this.identifier = identifier;
         }
 
+        public bool CheckMagic()
+        {
+            return identifier[(int)EI_MAG0].value.Equals((byte) magic[(int) EI_MAG0]) &&
+                   identifier[(int)EI_MAG1].value.Equals((byte) magic[(int)EI_MAG1]) &&
+                   identifier[(int)EI_MAG2].value.Equals((byte) magic[(int)EI_MAG2]) &&
+                   identifier[(int)EI_MAG3].value.Equals((byte) magic[(int)EI_MAG3]);
+        }
 
+        public EnumELFFileClass GetFileClass()
+        {
+            ushort Class = identifier[(int) EI_CLASS].value;
+            return (EnumELFFileClass) Class;
+        }
     }
 }
