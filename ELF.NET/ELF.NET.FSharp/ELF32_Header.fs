@@ -22,9 +22,9 @@ OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE.
 *)
 
-namespace ELF_Types
+namespace ELF.NET.FSharp.ELF_Types
 open System.Runtime.InteropServices;
-open ELF_Types;
+open ELF.NET.FSharp.ELF_Types;
 
     [<StructLayout(LayoutKind.Explicit)>]
     type ELF32_header = 

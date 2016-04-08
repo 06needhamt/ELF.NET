@@ -1,5 +1,4 @@
-(*
-The MIT License (MIT)
+﻿/* The MIT License (MIT)
 
 Copyright (c) 2016 Tom Needham
 
@@ -19,15 +18,27 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*)
-namespace ELF.NET.FSharp.ELF_Types
+SOFTWARE. */
 
-open System.Runtime.InteropServices;
+using ELF.NET.Attributes;
 
-    [<StructLayout(LayoutKind.Explicit)>]
-    type ELF32_half =
-        struct
-            [<FieldOffset(0)>]
-            val mutable  value: uint16
-        end
+namespace ELF.NET.Header
+{
+    public enum EnumELFFileTypes
+    {
+        [Description("Unknown File Type")]
+        ET_NONE = 0,
+        [Description("Relocatable ELF File")]
+        ET_REL = 1,
+        [Description("Executable ELF file")]
+        EL_EXEC = 2,
+        [Description("Shared Object File")]
+        ET_DYN = 3,
+        [Description("Core File")]
+        ET_CORE = 4,
+        [Description("Reserved")]
+        ET_LOPROC = 0xFF00,
+        [Description("Reserved")]
+        ET_HIPROC = 0xFFFF,
+    }
+}

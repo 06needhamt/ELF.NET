@@ -40,10 +40,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Attributes\DescriptionAttribute.cs" />
+    <Compile Include="Attributes\IAttribute.cs" />
+    <Compile Include="ELFExtensions.cs" />
     <Compile Include="Header\ELFIdentifierParser.cs" />
+    <Compile Include="Header\EnumELFDataEncoding.cs" />
     <Compile Include="Header\EnumELFFileClass.cs" />
+    <Compile Include="Header\EnumELFFileTypes.cs" />
     <Compile Include="Header\EnumELFIdentifierBytes.cs" />
-    <Compile Include="Header\HeaderParser.cs" />
+    <Compile Include="Header\ELFHeaderParser.cs" />
+    <Compile Include="Header\EnumELFVersion.cs" />
+    <Compile Include="Header\EnumMachineType.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -1,5 +1,4 @@
-(*
-The MIT License (MIT)
+﻿/* The MIT License (MIT)
 
 Copyright (c) 2016 Tom Needham
 
@@ -19,15 +18,19 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*)
-namespace ELF.NET.FSharp.ELF_Types
+SOFTWARE. */
 
-open System.Runtime.InteropServices;
+using ELF.NET.Attributes;
 
-    [<StructLayout(LayoutKind.Explicit)>]
-    type ELF32_half =
-        struct
-            [<FieldOffset(0)>]
-            val mutable  value: uint16
-        end
+namespace ELF.NET.Header
+{
+    public enum EnumELFDataEncoding
+    {
+        [Description("Invalid Data Encoding")]
+        ELFDATANONE = 0,
+        [Description("Least Significant bit (Little Endian)")]
+        ELFDATA2LSB = 1,
+        [Description("Most Significant bit (Big Endian)")]
+        ELFDATA2MSB = 2,
+    }
+}

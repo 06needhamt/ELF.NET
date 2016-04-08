@@ -28,7 +28,7 @@ using System.Threading.Tasks;
 using System.IO;
 using ELF.NET;
 using ELF.NET.Header;
-using ELF_Types;
+using ELF.NET.FSharp.ELF_Types;
 
 namespace TestApp
 {
@@ -42,9 +42,9 @@ namespace TestApp
                 Console.ReadKey();
                 return;
             }
-            HeaderParser hp = new HeaderParser(args);
+            ELFHeaderParser hp = new ELFHeaderParser(args);
             ELF32_header header = hp.ParseHeader();
-            HeaderParser.PrintHeader(header);
+            ELFHeaderParser.PrintHeader(header);
             ELFIdentifierParser identparser = new ELFIdentifierParser(header.e_ident);
             if (identparser.CheckMagic())
             {
@@ -56,7 +56,12 @@ namespace TestApp
                 Console.ReadKey();
                 return;
             }
-            Console.WriteLine("ELF File Class: " + identparser.GetFileClass().ToString());
+            Console.WriteLine("ELF File Class: " + identparser.GetFileClass().ToString() + " : " + identparser.GetFileClass().DescriptionAttribute());
+            Console.WriteLine("ELF Data Encoding " + identparser.GetDataEncoding().ToString() + ": " + identparser.GetDataEncoding().DescriptionAttribute());
+            Console.WriteLine("ELF Version " + identparser.GetFileVersion().ToString() + " : " + identparser.GetFileVersion().DescriptionAttribute());
+            Console.WriteLine("ELF File Type " + hp.ParseFileType().ToString() + " : " + hp.ParseFileType().DescriptionAttribute());
+            Console.WriteLine("ELF Machine Type " + hp.ParseMachineType().ToString() + " : " + hp.ParseMachineType().DescriptionAttribute());
+            Console.WriteLine("ELF Identifier Size " + identparser.GetIdentifierSize().ToString());
             Console.ReadKey();
         }
 

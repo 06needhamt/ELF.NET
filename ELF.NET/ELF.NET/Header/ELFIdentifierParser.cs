@@ -25,7 +25,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ELF_Types;
+using ELF.NET.FSharp.ELF_Types;
 using static ELF.NET.Header.EnumELFIdentifierBytes;
 
 namespace ELF.NET.Header
@@ -52,6 +52,23 @@ namespace ELF.NET.Header
         {
             ushort Class = identifier[(int) EI_CLASS].value;
             return (EnumELFFileClass) Class;
+        }
+
+        public EnumELFDataEncoding GetDataEncoding()
+        {
+            ushort encoding = identifier[(int) EI_DATA].value;
+            return (EnumELFDataEncoding) encoding;
+        }
+
+        public EnumELFVersion GetFileVersion()
+        {
+            ushort version = identifier[(int) EI_VERSION].value;
+            return (EnumELFVersion) version;
+        }
+
+        public int GetIdentifierSize()
+        {
+            return identifier.Length;
         }
     }
 }

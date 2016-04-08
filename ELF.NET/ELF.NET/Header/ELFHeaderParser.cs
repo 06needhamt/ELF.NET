@@ -26,17 +26,17 @@ using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using ELF_Types;
+using ELF.NET.FSharp.ELF_Types;
 
 
 namespace ELF.NET.Header
 {
-    public class HeaderParser
+    public class ELFHeaderParser
     {
         private byte[] buffer;
         private ELF32_header head;
         private FileStream stream;
-        public HeaderParser(string[] args)
+        public ELFHeaderParser(string[] args)
         {
             buffer = new byte[8];
             head = new ELF32_header();
@@ -113,6 +113,18 @@ namespace ELF.NET.Header
             Console.WriteLine("e_shnum: " + head.e_shnum.value);
             Console.WriteLine("e_shstrndks: " + head.e_shstrndxs.value);
             Console.WriteLine("Header successfully read");
+        }
+
+        public EnumELFFileTypes ParseFileType()
+        {
+            ushort fileType = head.e_type.value;
+            return (EnumELFFileTypes) fileType;
+        }
+
+        public EnumMachineType ParseMachineType()
+        {
+            ushort machine = head.e_machine.value;
+            return (EnumMachineType) machine;
         }
     }
 }

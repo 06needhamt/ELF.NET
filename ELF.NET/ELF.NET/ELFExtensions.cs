@@ -20,17 +20,33 @@ LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 SOFTWARE. */
 
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Reflection;
+using System.Text;
+using System.Threading.Tasks;
 using ELF.NET.Attributes;
 
-namespace ELF.NET.Header
+namespace ELF.NET
 {
-    public enum EnumELFFileClass
+    public static class ELFExtensions
     {
-        [Description("Unknown File Class")]
-        ELFCLASSNONE = 0,
-        [Description("32 bit File")]
-        ELFCLASS32 = 1,
-        [Description("64 bit File")]
-        ELFCLASS64 = 2,
+        /// <summary>
+        /// This function gets the description attribute from an enum item
+        /// </summary>
+        /// <typeparam name="T"> The enum type of the item</typeparam>
+        /// <param name="source"> The enum item to get the description from</param>
+        /// <returns> The description attribute of the enum item </returns>
+        public static string DescriptionAttribute<T>(this T source)
+        {
+            FieldInfo fi = source.GetType().GetField(source.ToString());
+
+            DescriptionAttribute[] attributes = (DescriptionAttribute[])fi.GetCustomAttributes(typeof(DescriptionAttribute), false);
+
+            if (attributes != null && attributes.Length > 0)
+                return attributes[0].Value;
+            return source.ToString();
+        }
     }
 }

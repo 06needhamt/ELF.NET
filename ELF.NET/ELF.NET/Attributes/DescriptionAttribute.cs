@@ -1,5 +1,4 @@
-(*
-The MIT License (MIT)
+﻿/* The MIT License (MIT)
 
 Copyright (c) 2016 Tom Needham
 
@@ -19,15 +18,28 @@ FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
 AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
 LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
 OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
-SOFTWARE.
-*)
-namespace ELF.NET.FSharp.ELF_Types
+SOFTWARE. */
 
-open System.Runtime.InteropServices;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-    [<StructLayout(LayoutKind.Explicit)>]
-    type ELF32_half =
-        struct
-            [<FieldOffset(0)>]
-            val mutable  value: uint16
-        end
+namespace ELF.NET.Attributes
+{
+    public class DescriptionAttribute : Attribute, IAttribute<string>
+    {
+        private string value;
+
+        public DescriptionAttribute(string value)
+        {
+            this.value = value;
+        }
+
+        public string Value
+        {
+            get { return value; }
+        }
+    }
+}
