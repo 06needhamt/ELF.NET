@@ -1,2 +1,2 @@
 language: csharp
-solution: ELF.NET.sln
+solution: ELF.NET/ELF.NET.sln
