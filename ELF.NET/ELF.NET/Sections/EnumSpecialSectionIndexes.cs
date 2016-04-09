@@ -22,13 +22,25 @@ SOFTWARE. */
 
 using ELF.NET.Attributes;
 
-namespace ELF.NET.Header
+namespace ELF.NET.Sections
 {
-    public enum EnumELFVersion
+    public enum EnumSpecialSectionIndexes
     {
-        [Description("Unknown Version")]
-        EV_UNKNOWN = 0,
-        [Description("Current Version")]
-        EV_CURRENT = 1,
+        [Description("Undefined Section")]
+        SHN_UNDEF = 0,
+        [Description("Low process section")]
+        SHN_LOPROC = 0xFF00,
+        [Description("High process section")]
+        SHN_HIPROC = 0xFF1F,
+        [Description("Low Operating System Section")]
+        SHN_LOOS = 0xFF20,
+        [Description("High Operating System Section")]
+        SHN_HIOS = 0xFF3F,
+        [Description("Absolute Values Section")]
+        SHN_ABS = 0xFFF1,
+        [Description("Common Symbols Section")]
+        SHN_COMMON = 0xFFF2,
+        [Description("Section Header Escape Value")]
+        SHN_XINDEX = 0xFFFF,
     }
 }

@@ -124,7 +124,10 @@ namespace ELF.NET.Header
         public EnumMachineType ParseMachineType()
         {
             ushort machine = head.e_machine.value;
-            return (EnumMachineType) machine;
+            if(Enum.IsDefined(typeof(EnumMachineType),(int)machine))
+                return (EnumMachineType) machine;
+            else
+                return EnumMachineType.RESERVED;
         }
     }
 }

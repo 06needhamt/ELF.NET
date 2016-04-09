@@ -392,5 +392,7 @@ namespace ELF.NET.Header
         EM_AMDGPU = 224,
         [Description("RISC-V")]
         EM_RISCV = 243,
+        [Description("Reserved")]
+        RESERVED = 0xFFFF,
     }
 }

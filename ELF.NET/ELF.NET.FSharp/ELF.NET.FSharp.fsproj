@@ -52,6 +52,7 @@
     <Compile Include="ELF32_Word.fs" />
     <Compile Include="ELf32_Char.fs" />
     <Compile Include="ELF32_Header.fs" />
+    <Compile Include="ELF32_Shdr.fs" />
   </ItemGroup>
   <PropertyGroup>
     <MinimumVisualStudioVersion Condition="'$(MinimumVisualStudioVersion)' == ''">11</MinimumVisualStudioVersion>

@@ -45,17 +45,17 @@ open ELF.NET.FSharp.ELF_Types;
             val mutable  e_shoff: ELF32_off
             [<FieldOffset(36)>]
             val mutable  e_flags: ELF32_word
-            [<FieldOffset(38)>]
-            val mutable  e_ehsize: ELF32_half
             [<FieldOffset(40)>]
-            val mutable  e_phentsize: ELF32_half
+            val mutable  e_ehsize: ELF32_half
             [<FieldOffset(42)>]
-            val mutable  e_phnum: ELF32_half
+            val mutable  e_phentsize: ELF32_half
             [<FieldOffset(44)>]
-            val mutable  e_shentsize: ELF32_half
+            val mutable  e_phnum: ELF32_half
             [<FieldOffset(46)>]
-            val mutable  e_shnum: ELF32_half
+            val mutable  e_shentsize: ELF32_half
             [<FieldOffset(48)>]
+            val mutable  e_shnum: ELF32_half
+            [<FieldOffset(50)>]
             val mutable  e_shstrndxs: ELF32_half
 
         end
